@@ -30,7 +30,9 @@ def resolve_npm_executable() -> str:
 
 def build_frontend_command(port: int, npm_executable: Optional[str] = None) -> list[str]:
     npm = npm_executable or resolve_npm_executable()
-    return [npm, "run", "dev", "--", "--host", "127.0.0.1", "--port", str(port)]
+    # 0.0.0.0 exposes the dev server on the LAN so other devices can open the
+    # platform via this machine's IP.
+    return [npm, "run", "dev", "--", "--host", "0.0.0.0", "--port", str(port)]
 
 
 def start_frontend(port: int) -> Optional[subprocess.Popen]:
