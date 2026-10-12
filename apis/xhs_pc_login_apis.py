@@ -632,9 +632,12 @@ class XHSLoginApi:
         )
 
         res = resp.json()
-        data = res.get('data') or {}
-        if not res.get('success') or data.get('code_status') != 2:
+        if not res.get('success'):
             raise RuntimeError(res.get('msg') or '二维码最终登录状态无效')
+        # 实抓（2026-10-12）：确认后的响应是 {'code':0,'success':true,'msg':'成功',
+        # 'data':{}}，正式会话只通过 Set-Cookie 下发；body 里的 code_status /
+        # login_info 字段即使存在也是兼容旧格式，二者取其一即可。
+        data = res.get('data') or {}
         login_info = data.get('login_info') or {}
         session = str(login_info.get('session') or '')
         if session:
