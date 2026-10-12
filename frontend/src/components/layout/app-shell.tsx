@@ -47,10 +47,12 @@ const mainNavItems: MenuProps["items"] = [
   { key: "/platforms/xhs/crawler", icon: <CloudDownloadOutlined />, label: "数据抓取" },
 ];
 
+// 页脚菜单暂时屏蔽（任务中心/模型配置/设置路由保留，URL 直达仍可用）。
+// 恢复时把下面三项放回数组即可。
 const footerNavItems: MenuProps["items"] = [
-  { key: "/tasks", icon: <ScheduleOutlined />, label: "任务中心" },
-  { key: "/models", icon: <RobotOutlined />, label: "模型配置" },
-  { key: "/settings", icon: <SettingOutlined />, label: "设置" },
+  // { key: "/tasks", icon: <ScheduleOutlined />, label: "任务中心" },
+  // { key: "/models", icon: <RobotOutlined />, label: "模型配置" },
+  // { key: "/setting", icon: <SettingOutlined />, label: "设置" },
 ];
 
 function levelColor(level: string): string {
@@ -142,7 +144,7 @@ export function AppShell() {
           >
             <Space align="center" size={collapsed ? 0 : 8}>
               <img src="/turix-logo.svg" alt="Turix" style={{ width: 28, height: 28, borderRadius: 6, objectFit: "cover", flexShrink: 0 }} />
-              {!collapsed && <span style={{ fontWeight: 600, fontSize: 14, color: "rgba(255,255,255,.85)" }}>Turix</span>}
+              {!collapsed && <span style={{ fontWeight: 600, fontSize: 14, color: "rgba(255,255,255,.85)" }}>TuriX 小红书运营平台</span>}
             </Space>
             {!collapsed && <Button type="text" size="small" icon={<MenuFoldOutlined />} onClick={(e) => { e.stopPropagation(); setCollapsed(true); }} style={{ color: "rgba(255,255,255,.35)" }} />}
           </div>
@@ -159,7 +161,9 @@ export function AppShell() {
 
           {/* Footer — pinned to bottom */}
           <div style={{ flexShrink: 0, borderTop: "1px solid #303030" }}>
-            <Menu theme="dark" mode="inline" selectedKeys={selectedKeys} onClick={handleMenuClick} items={footerNavItems} style={{ borderRight: 0 }} />
+            {(footerNavItems?.length ?? 0) > 0 && (
+              <Menu theme="dark" mode="inline" selectedKeys={selectedKeys} onClick={handleMenuClick} items={footerNavItems} style={{ borderRight: 0 }} />
+            )}
             <div style={{ padding: collapsed ? "8px 0" : "8px 16px", borderTop: "1px solid #262626", display: "flex", alignItems: "center", gap: 8, justifyContent: collapsed ? "center" : "flex-start" }}>
               <Avatar size={22} icon={<UserOutlined />} style={{ background: "#1668dc", flexShrink: 0, fontSize: 11 }}>{(auth.user?.username ?? "U")[0].toUpperCase()}</Avatar>
               {!collapsed && (
