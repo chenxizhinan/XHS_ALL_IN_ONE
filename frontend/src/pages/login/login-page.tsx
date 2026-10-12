@@ -81,7 +81,7 @@ export function LoginPage() {
       const from = (
         location.state as { from?: { pathname?: string } } | null
       )?.from?.pathname;
-      navigate(from || "/platform-select", { replace: true });
+      navigate(from || "/platforms/xhs/accounts", { replace: true });
     } catch (caughtError) {
       setError(
         errorMessage(
@@ -130,7 +130,7 @@ export function LoginPage() {
                 color: "#fff",
               }}
             >
-              X
+              T
             </div>
             <div>
               <Text
@@ -142,7 +142,7 @@ export function LoginPage() {
                   display: "block",
                 }}
               >
-                Spider_XHS
+                Turix
               </Text>
               <Text strong style={{ fontSize: 14 }}>
                 Operations OS
@@ -158,15 +158,13 @@ export function LoginPage() {
               lineHeight: 1.4,
             }}
           >
-            小红书运营，从抓取到发布一屏推进。
+            内容运营，从抓取到发布一屏推进。
           </Title>
           <Paragraph
             type="secondary"
             style={{ fontSize: 15, marginBottom: 40 }}
           >
-            数据发现、内容库、AI
-            改写、账号矩阵和 Creator
-            发布统一在一个工作区里完成。
+            数据发现、账号矩阵和内容管理统一在一个工作区里完成。
           </Paragraph>
 
           <Row gutter={24}>
@@ -322,8 +320,8 @@ export function LoginPage() {
               }}
             >
               {mode === "login"
-                ? "登录后选择小红书工作区开始运营。"
-                : "注册后会自动进入平台选择页。"}
+                ? "登录后进入工作台开始运营。"
+                : "注册后会自动进入工作台。"}
             </Text>
           </Card>
         </Col>

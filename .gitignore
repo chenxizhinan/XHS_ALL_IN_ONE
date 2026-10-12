@@ -39,3 +39,4 @@ AGENTS.md
 .superpowers
 .pytest_cache
 docx
+.DS_Store

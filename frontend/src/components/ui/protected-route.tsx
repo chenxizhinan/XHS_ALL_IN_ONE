@@ -55,7 +55,7 @@ export function PublicOnlyRoute({ children }: RouteGuardProps) {
   }
 
   if (auth.isAuthenticated) {
-    return <Navigate to="/platform-select" replace />;
+    return <Navigate to="/platforms/xhs/accounts" replace />;
   }
 
   return <>{children}</>;

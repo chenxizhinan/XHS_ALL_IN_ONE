@@ -5,7 +5,6 @@ import { ComingSoonPage } from "../components/platforms/coming-soon";
 import { ProtectedRoute, PublicOnlyRoute } from "../components/ui/protected-route";
 import { LoginPage } from "../pages/login/login-page";
 import { ModelConfigPage } from "../pages/models/model-config-page";
-import { PlatformSelectPage } from "../pages/platform-select/platform-select-page";
 import { SettingsPage } from "../pages/settings/settings-page";
 import { TaskCenterPage } from "../pages/tasks/task-center-page";
 import { AutoOpsPage } from "../pages/platforms/xhs/auto-ops-page";
@@ -28,7 +27,7 @@ export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/platform-select" replace />} />
+        <Route path="/" element={<Navigate to="/platforms/xhs/accounts" replace />} />
         <Route
           path="/login"
           element={
@@ -41,7 +40,7 @@ export function AppRouter() {
           path="/platform-select"
           element={
             <ProtectedRoute>
-              <PlatformSelectPage />
+              <Navigate to="/platforms/xhs/accounts" replace />
             </ProtectedRoute>
           }
         />

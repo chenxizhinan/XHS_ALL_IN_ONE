@@ -1,12 +1,6 @@
 import {
-  AimOutlined,
-  BarChartOutlined,
   BellOutlined,
   CloudDownloadOutlined,
-  DashboardOutlined,
-  DatabaseOutlined,
-  FileTextOutlined,
-  KeyOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -15,13 +9,9 @@ import {
   SafetyCertificateOutlined,
   ScheduleOutlined,
   SearchOutlined,
-  SendOutlined,
   SettingOutlined,
-  ThunderboltOutlined,
-  StarOutlined,
   SunOutlined,
   UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
 import {
   Avatar,
@@ -52,19 +42,9 @@ const { Sider, Header, Content } = Layout;
 const { Title, Text } = Typography;
 
 const mainNavItems: MenuProps["items"] = [
-  { key: "/platforms/xhs/dashboard", icon: <DashboardOutlined />, label: "总览" },
   { key: "/platforms/xhs/accounts", icon: <SafetyCertificateOutlined />, label: "账号矩阵" },
   { key: "/platforms/xhs/discovery", icon: <SearchOutlined />, label: "笔记发现" },
   { key: "/platforms/xhs/crawler", icon: <CloudDownloadOutlined />, label: "数据抓取" },
-  { key: "/platforms/xhs/keywords", icon: <KeyOutlined />, label: "关键词组" },
-  { key: "/platforms/xhs/analytics", icon: <BarChartOutlined />, label: "数据洞察" },
-  { key: "/platforms/xhs/benchmarks", icon: <AimOutlined />, label: "竞品监控" },
-  { key: "/platforms/xhs/image-studio", icon: <StarOutlined />, label: "图片工坊" },
-  { key: "/platforms/xhs/video-studio", icon: <VideoCameraOutlined />, label: "视频工坊" },
-  { key: "/platforms/xhs/library", icon: <DatabaseOutlined />, label: "内容库" },
-  { key: "/platforms/xhs/drafts", icon: <FileTextOutlined />, label: "草稿工坊" },
-  { key: "/platforms/xhs/publish", icon: <SendOutlined />, label: "发布中心" },
-  { key: "/platforms/xhs/auto-ops", icon: <ThunderboltOutlined />, label: "自动运营" },
 ];
 
 const footerNavItems: MenuProps["items"] = [
@@ -158,11 +138,11 @@ export function AppShell() {
           {/* Logo */}
           <div
             style={{ padding: collapsed ? "14px 0" : "14px 16px", display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "space-between", borderBottom: "1px solid #303030", flexShrink: 0, cursor: "pointer" }}
-            onClick={() => navigate("/platform-select")}
+            onClick={() => navigate("/platforms/xhs/accounts")}
           >
             <Space align="center" size={collapsed ? 0 : 8}>
-              <img src="/logo.jpg" alt="Logo" style={{ width: 28, height: 28, borderRadius: 6, objectFit: "cover", flexShrink: 0 }} />
-              {!collapsed && <span style={{ fontWeight: 600, fontSize: 14, color: "rgba(255,255,255,.85)" }}>Spider XHS</span>}
+              <img src="/turix-logo.svg" alt="Turix" style={{ width: 28, height: 28, borderRadius: 6, objectFit: "cover", flexShrink: 0 }} />
+              {!collapsed && <span style={{ fontWeight: 600, fontSize: 14, color: "rgba(255,255,255,.85)" }}>Turix</span>}
             </Space>
             {!collapsed && <Button type="text" size="small" icon={<MenuFoldOutlined />} onClick={(e) => { e.stopPropagation(); setCollapsed(true); }} style={{ color: "rgba(255,255,255,.35)" }} />}
           </div>
