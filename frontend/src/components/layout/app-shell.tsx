@@ -154,9 +154,9 @@ export function AppShell() {
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
                   }}
-                  title="TuriX 小红书运营平台"
+                  title="小红书运营平台"
                 >
-                  TuriX 小红书运营平台
+                  小红书运营平台
                 </span>
               )}
             </Space>
