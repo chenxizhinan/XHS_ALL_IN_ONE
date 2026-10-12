@@ -1,0 +1,46 @@
+# TuriX 小红书运营平台 — 生产部署 Compose
+# ==========================================
+# 从阿里云镜像仓库拉取镜像，不需要在虚拟机上构建。
+#
+# 使用方法（虚拟机上）：
+#   mkdir -p data config backend/app/storage/media backend/app/storage/exports
+#   # 把 config/default.yaml 放到 ./config/ 并改好 secret_key / serve_static
+#   docker compose up -d
+#
+# 更新版本：
+#   docker compose pull && docker compose up -d
+
+services:
+  app:
+    image: turix-registry.cn-heyuan.cr.aliyuncs.com/turix/xhs-ops:latest
+    # 回滚到历史版本时，把 image 的 tag 换成对应 commit 短哈希，
+    # 例如 turix-registry.cn-heyuan.cr.aliyuncs.com/turix/xhs-ops:d79d993
+    container_name: turix-xhs
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./backend/app/storage/media:/app/backend/app/storage/media
+      - ./backend/app/storage/exports:/app/backend/app/storage/exports
+    environment:
+      - CONFIG_FILE=/app/config/default.yaml
+      # 敏感值优先级高于 YAML，可在此覆盖（推荐密钥走环境变量而不是写进 YAML）：
+      # - SECRET_KEY=change-me-to-a-long-random-string
+      # - FERNET_KEY=
+      # 虚拟机走代理访问小红书时取消注释：
+      # - HTTP_PROXY=http://proxy-host:port
+      # - HTTPS_PROXY=http://proxy-host:port
+      # - NO_PROXY=localhost,127.0.0.1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
