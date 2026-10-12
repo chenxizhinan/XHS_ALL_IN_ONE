@@ -139,14 +139,28 @@ export function AppShell() {
         <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
           {/* Logo */}
           <div
-            style={{ padding: collapsed ? "14px 0" : "14px 16px", display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "space-between", borderBottom: "1px solid #303030", flexShrink: 0, cursor: "pointer" }}
+            style={{ padding: collapsed ? "14px 0" : "14px 16px", display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "space-between", gap: 8, borderBottom: "1px solid #303030", flexShrink: 0, cursor: "pointer" }}
             onClick={() => navigate("/platforms/xhs/accounts")}
           >
-            <Space align="center" size={collapsed ? 0 : 8}>
+            <Space align="center" size={collapsed ? 0 : 8} style={{ minWidth: 0, flex: 1 }}>
               <img src="/turix-logo.svg" alt="Turix" style={{ width: 28, height: 28, borderRadius: 6, objectFit: "cover", flexShrink: 0 }} />
-              {!collapsed && <span style={{ fontWeight: 600, fontSize: 14, color: "rgba(255,255,255,.85)" }}>TuriX 小红书运营平台</span>}
+              {!collapsed && (
+                <span
+                  style={{
+                    fontWeight: 600,
+                    fontSize: 14,
+                    color: "rgba(255,255,255,.85)",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                  title="TuriX 小红书运营平台"
+                >
+                  TuriX 小红书运营平台
+                </span>
+              )}
             </Space>
-            {!collapsed && <Button type="text" size="small" icon={<MenuFoldOutlined />} onClick={(e) => { e.stopPropagation(); setCollapsed(true); }} style={{ color: "rgba(255,255,255,.35)" }} />}
+            {!collapsed && <Button type="text" size="small" icon={<MenuFoldOutlined />} onClick={(e) => { e.stopPropagation(); setCollapsed(true); }} style={{ color: "rgba(255,255,255,.35)", flexShrink: 0 }} />}
           </div>
           {collapsed && (
             <div style={{ textAlign: "center", padding: "6px 0", borderBottom: "1px solid #262626", flexShrink: 0 }}>
