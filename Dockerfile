@@ -18,7 +18,8 @@ WORKDIR /app/frontend
 
 # Install dependencies first (layer caching)
 COPY frontend/package.json frontend/package-lock.json* ./
-RUN npm ci --no-audit --no-fund 2>/dev/null || npm install --no-audit --no-fund
+RUN npm config set registry https://registry.npmmirror.com \
+    && (npm ci --no-audit --no-fund 2>/dev/null || npm install --no-audit --no-fund)
 
 # Copy source and build
 COPY frontend/ ./
@@ -44,9 +45,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
+# Install Python dependencies (Aliyun mirror: much faster from CN networks)
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
 
 # Copy project source
 COPY . .
